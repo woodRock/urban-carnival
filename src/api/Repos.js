@@ -1,5 +1,5 @@
 import React from "react";
-import { Query } from "react-apollo";
+import { useQuery } from "react-apollo";
 import gql from "graphql-tag";
 
 const GET_REPOSITORIES = gql`
@@ -19,28 +19,27 @@ const GET_REPOSITORIES = gql`
   }
 `;
 
-const GitRepositories = () => (
-  <Query query={GET_REPOSITORIES}>
-    {({ loading, error, data }) => {
-      if (loading) return <h4>Loading</h4>;
-      if (error) console.log(error);
-      const {
-        viewer: {
-          repositories: { edges }
-        }
-      } = data;
-      return (
-        <div>
-          <ul>
-            {edges.map(edge => (
-              <Repository {...edge.node} />
-            ))}
-          </ul>
-        </div>
-      );
-    }}
-  </Query>
-);
+const GitRepositories = () => {
+  const { loading, error, data } = useQuery(GET_REPOSITORIES);
+
+  if (loading) return <h4>Loading</h4>;
+
+  if (error) console.log(error);
+
+  const {
+    viewer: {
+      repositories: { edges }
+    }
+  } = data;
+
+  return (
+    <>
+      {edges.map(edge => (
+        <Repository {...edge.node} />
+      ))}
+    </>
+  );
+};
 
 const Repository = ({ name, description, openGraphImageUrl, url }) => {
   return (
