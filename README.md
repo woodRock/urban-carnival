@@ -6,4 +6,4 @@ This project is a uses Graphql and React. It makes a query to the Github API to 
 
 ## Applications
 
-The idea was to implement this component on my portfolio to automate the projects page on my website.
+The idea was to implement this component on my portfolio to automate the projects page on my [website](https://woodrock.tk).
