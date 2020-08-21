@@ -24,6 +24,7 @@ const GET_REPOSITORIES = gql`
             description
             openGraphImageUrl
             url
+            updatedAt
           }
         }
       }
@@ -52,7 +53,13 @@ const GitRepositories = () => {
   );
 };
 
-const Repository = ({ name, description, openGraphImageUrl, url }) => {
+const Repository = ({
+  name,
+  description,
+  openGraphImageUrl,
+  url,
+  updatedAt
+}) => {
   return (
     <>
       <div
@@ -65,6 +72,7 @@ const Repository = ({ name, description, openGraphImageUrl, url }) => {
         }}
       >
         <h1>{name}</h1>
+        <p>{updatedAt}</p>
         <li>{description}</li>
         <a href={url}>
           <img
